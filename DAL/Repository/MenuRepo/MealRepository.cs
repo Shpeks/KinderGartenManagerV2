@@ -7,7 +7,7 @@ using Core.DTOs.MenuModels;
 using DAL.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL.Repository.MenuFolder
+namespace DAL.Repository.MenuRepo
 {
     public class MealRepository
     {
