@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.DTOs.MenuModels;
+﻿using Core.DTOs.MenuModels;
+using Core.Interfaces.Repository;
 using DAL.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repository.MenuRepo
 {
-    public class MealTimeRepository
+    public class MealTimeRepository : IMealTimeRepository
     {
         private readonly ApplicationDbContext _context;
         public MealTimeRepository(ApplicationDbContext context)

@@ -1,0 +1,10 @@
+﻿using Core.DTOs.MenuModels;
+
+namespace Core.Interfaces.Repository
+{
+    public interface IMealRepository
+    {
+        Task<List<MealDTO>> GetAllMeals();
+        Task<MealDTO> GetMealById(int id);
+    }
+}

@@ -1,11 +1,12 @@
 ﻿using Core.DTOs.MenuModels;
+using Core.Interfaces.Repository;
 using DAL.Data;
 using DAL.Entities.MenuModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL.Repository.MenuFolder
+namespace DAL.Repository.MenuRepo
 {
-    public class MenuRepository
+    public class MenuRepository : IMenuRepository
     {
         private readonly ApplicationDbContext _context;
         public MenuRepository(ApplicationDbContext context)

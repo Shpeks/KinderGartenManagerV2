@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.DTOs.MenuModels;
+﻿using Core.DTOs.MenuModels;
+using Core.Interfaces.Repository;
 using DAL.Data;
 using DAL.Entities.MenuModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL.Repository.MenuFolder
+namespace DAL.Repository.MenuRepo
 {
-    public class MenuFoodRepository
+    public class MenuFoodRepository : IMenuFoodRepository
     {
         private readonly ApplicationDbContext _context;
         public MenuFoodRepository(ApplicationDbContext context)
@@ -20,7 +16,7 @@ namespace DAL.Repository.MenuFolder
         public async Task<List<MenuFoodDTO>> GetAllMenuFoodsAsync()
         {
             var menuFoodEntity = await _context.MenuFoods.ToListAsync();
-            
+
             return menuFoodEntity.Select(m => new MenuFoodDTO
             {
                 Code = m.Code,
@@ -28,7 +24,7 @@ namespace DAL.Repository.MenuFolder
                 MealId = m.MealId,
                 MealTimeId = m.MealTimeId,
                 Name = m.Name,
-                UnitId = m.UnitId, 
+                UnitId = m.UnitId,
                 MenuId = m.MenuId,
                 Count = m.Count,
             }).ToList();
