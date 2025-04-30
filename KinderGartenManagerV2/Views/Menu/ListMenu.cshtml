@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MenuViewModel>
+
+<h1 class="mb-4">Меню</h1>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				Название
+			</th>
+			<th>
+				Тип сада
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@item.CountChild
+				</td>
+				<td>
+					@item.TypeChild
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

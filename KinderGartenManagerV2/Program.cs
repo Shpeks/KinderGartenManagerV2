@@ -1,4 +1,6 @@
+using Core.Interfaces.Repository;
 using DAL.Data;
+using DAL.Repository.MenuRepo;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,8 @@ var conf = builder.Configuration;
 
 // Add services to the container.
 services.AddControllersWithViews();
+
+services.AddScoped<IMenuRepository, MenuRepository>();
 
 services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(conf.GetConnectionString("DefaultConnection")));
@@ -30,6 +34,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Menu}/{action=List}/{id?}");
 
 app.Run();
