@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Entities.UserModels;
 
 namespace DAL.Entities.MenuModels
 {
@@ -19,7 +20,7 @@ namespace DAL.Entities.MenuModels
 
         public int CountChild { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
     
         public ICollection<MenuFood> MenuFoods { get; set; }

@@ -1,6 +1,9 @@
 using Core.Interfaces.Repository;
 using DAL.Data;
+using DAL.Entities.UserModels;
+using DAL.Repository;
 using DAL.Repository.MenuRepo;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,9 +14,14 @@ var conf = builder.Configuration;
 services.AddControllersWithViews();
 
 services.AddScoped<IMenuRepository, MenuRepository>();
+services.AddScoped<IUserRepository, UserRepository>();
 
 services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(conf.GetConnectionString("DefaultConnection")));
+
+services.AddIdentity<User, IdentityRole<string>>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
@@ -30,6 +38,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Entities.MenuModels;
+using Microsoft.AspNetCore.Identity;
 
-namespace DAL.Entities
+namespace DAL.Entities.UserModels
 {
-    public class User
+    public class User : IdentityUser
     {
-        public int Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         public string FirstName { get; set; }
 

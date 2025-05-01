@@ -6,17 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.Entities;
 using DAL.Entities.MenuModels;
+using DAL.Entities.UserModels;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-
-        public DbSet<User> Users { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<MenuFood> MenuFoods { get; set; }
         public DbSet<Unit> Units { get; set; }
@@ -25,6 +26,23 @@ namespace DAL.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+
+            builder.Entity<User>()
+                .ToTable("Users");
+
+            builder.Entity<IdentityRole>().
+                ToTable("Roles");
+
+            builder.Entity<IdentityUserRole<string>>()
+                .ToTable("UserRoles");
+            
+            builder.Ignore<IdentityUserLogin<string>>();
+            builder.Ignore<IdentityUserClaim<string>>();
+            builder.Ignore<IdentityUserToken<string>>();
+            builder.Ignore<IdentityRoleClaim<string>>();
+            builder.Ignore<IdentityUser>();
+
             builder.Entity<Menu>()
                 .HasOne(m => m.User)
                 .WithMany(u => u.Menus)
@@ -50,7 +68,6 @@ namespace DAL.Data
                 .WithMany(m => m.MenuFoods)
                 .HasForeignKey(mf => mf.MenuId);
 
-            base.OnModelCreating(builder);
         }
     }
 }
