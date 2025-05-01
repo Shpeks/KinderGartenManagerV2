@@ -14,7 +14,6 @@ var conf = builder.Configuration;
 services.AddControllersWithViews();
 
 services.AddScoped<IMenuRepository, MenuRepository>();
-services.AddScoped<IUserRepository, UserRepository>();
 
 services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(conf.GetConnectionString("DefaultConnection")));
