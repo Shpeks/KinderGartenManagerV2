@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<User, Role, string>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -28,20 +28,14 @@ namespace DAL.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<User>()
-                .ToTable("Users");
+            builder.Entity<User>().ToTable("Users");
+            builder.Entity<Role>().ToTable("Roles");
+            builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
+            builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
+            builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
 
-            builder.Entity<IdentityRole>().
-                ToTable("Roles");
-
-            builder.Entity<IdentityUserRole<string>>()
-                .ToTable("UserRoles");
-            
             builder.Ignore<IdentityUserLogin<string>>();
-            builder.Ignore<IdentityUserClaim<string>>();
             builder.Ignore<IdentityUserToken<string>>();
-            builder.Ignore<IdentityRoleClaim<string>>();
-            builder.Ignore<IdentityUser>();
 
             builder.Entity<Menu>()
                 .HasOne(m => m.User)

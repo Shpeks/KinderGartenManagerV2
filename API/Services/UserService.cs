@@ -17,21 +17,27 @@ namespace API.Services
 
         public async Task<IdentityResult> RegisterAsync(RegisterDTO userDTO)
         {
-            var user = new User { UserName = userDTO.UserName, FirstName = userDTO.FirstName, LastName = userDTO.LastName };
-            return await _userManager.CreateAsync(user, userDTO.Password);
+            var user = new User { UserName = userDTO.UserName, FirstName = userDTO.FirstName, LastName = userDTO.LastName};
+            
+            var result = await _userManager.CreateAsync(user, userDTO.Password);
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "Guest");
+            }
+
+            return result;
         }
 
-        public async Task<bool> LoginAsync(LoginDTO loginDTO)
+        public async Task<SignInResult> LoginAsync(LoginDTO loginDTO)
         {
             var user = await _userManager.FindByNameAsync(loginDTO.UserName);
-            if (user == null) return false;
+            if (user == null) return SignInResult.Failed;
 
-            var result = await _signInManager.PasswordSignInAsync(user,
+            return await _signInManager.PasswordSignInAsync(user,
                 loginDTO.Password,
                 isPersistent: loginDTO.RememberMe,
                 lockoutOnFailure: false);
-
-            return result.Succeeded;
         }
 
         public async Task LogoutAsync()

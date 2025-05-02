@@ -20,11 +20,19 @@ services.AddScoped<IUserService, UserService>();
 services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(conf.GetConnectionString("DefaultConnection")));
 
-services.AddIdentity<User, IdentityRole<string>>()
+services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
 var app = builder.Build();
+
+// Выполнения DbInit
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+    await DbInitializer.SeedAsync(scope.ServiceProvider);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
