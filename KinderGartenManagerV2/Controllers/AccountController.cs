@@ -21,6 +21,23 @@ namespace KinderGartenManagerV2.Controllers
         {
             return View();
         }
+        
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel viewModel)
+        {
+            var modelDto = viewModel.GetLoginDTO();
+
+            var result = await _userSerice.LoginAsync(modelDto);
+
+            return RedirectToAction("HomePage", "Home");
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel viewModel)

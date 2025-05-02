@@ -1,7 +1,8 @@
+using API.Services;
 using Core.Interfaces.Repository;
+using Core.Interfaces.Serivces;
 using DAL.Data;
 using DAL.Entities.UserModels;
-using DAL.Repository;
 using DAL.Repository.MenuRepo;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ var conf = builder.Configuration;
 services.AddControllersWithViews();
 
 services.AddScoped<IMenuRepository, MenuRepository>();
+services.AddScoped<IUserService, UserService>();
 
 services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(conf.GetConnectionString("DefaultConnection")));
@@ -42,6 +44,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Menu}/{action=List}/{id?}");
+    pattern: "{controller=Account}/{action=Register}/{id?}");
 
 app.Run();
