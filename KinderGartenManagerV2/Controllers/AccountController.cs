@@ -21,7 +21,7 @@ namespace KinderGartenManagerV2.Controllers
         {
             return View();
         }
-        
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -50,6 +50,14 @@ namespace KinderGartenManagerV2.Controllers
                 return BadRequest(result.Errors);
 
             return RedirectToAction("HomePage", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _userSerice.LogoutAsync();
+
+            return RedirectToAction("Login", "Account");
         }
     }
 }
