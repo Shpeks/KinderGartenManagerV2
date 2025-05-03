@@ -14,7 +14,8 @@ var conf = builder.Configuration;
 // Add services to the container.
 services.AddControllersWithViews();
 
-services.AddScoped<IMenuRepository, MenuRepository>();
+services.AddScoped<IMenuService, MenuService>();
+services.AddTransient<IMenuRepository, MenuRepository>();
 services.AddScoped<IUserService, UserService>();
 
 services.AddDbContext<ApplicationDbContext>(options =>

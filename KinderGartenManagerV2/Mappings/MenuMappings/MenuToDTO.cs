@@ -11,6 +11,8 @@ namespace KinderGartenManagerV2.Mappings.MenuMappings
             {
                 CountChild = viewModel.CountChild,
                 TypeChild = viewModel.TypeChild,
+                DateCreate = viewModel.DateCreate,
+                
             };
 
             return menu;

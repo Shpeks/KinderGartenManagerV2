@@ -16,7 +16,9 @@ namespace DAL.Repository.MenuRepo
 
         public async Task<List<MenuDTO>> GetAllMenusAsync()
         {
-            var menuEntity = await _context.Menus.ToListAsync();
+            var menuEntity = await _context.Menus
+                .Include(m => m.User)
+                .ToListAsync();
 
             return menuEntity.Select(m => new MenuDTO
             {
@@ -24,13 +26,16 @@ namespace DAL.Repository.MenuRepo
                 DateCreate = m.DateCreate,
                 TypeChild = m.TypeChild,
                 UserId = m.UserId,
+                FullName = $"{m.User.LastName} {m.User.FirstName}"
             }).ToList();
         }
 
         public async Task<MenuDTO> GetMenuByIdAsync(int id)
         {
-            var menuEntity = await _context.Menus.FindAsync(id);
+            var menuEntity = await _context.Menus
+                .FindAsync(id);
             if (menuEntity == null) return null;
+            var user = await _context.Users.FindAsync(menuEntity.UserId);
 
             return new MenuDTO
             {
@@ -38,6 +43,7 @@ namespace DAL.Repository.MenuRepo
                 DateCreate = menuEntity.DateCreate,
                 TypeChild = menuEntity.TypeChild,
                 UserId = menuEntity.UserId,
+                FullName = $"{user.LastName} {user.FirstName}"
             };
         }
 
@@ -49,7 +55,6 @@ namespace DAL.Repository.MenuRepo
             menuEntity.DateCreate = menuDTO.DateCreate;
             menuEntity.CountChild = menuDTO.CountChild;
             menuEntity.TypeChild = menuDTO.TypeChild;
-            menuEntity.UserId = menuDTO.UserId;
 
             await _context.SaveChangesAsync();
         }
@@ -58,9 +63,9 @@ namespace DAL.Repository.MenuRepo
         {
             var menuEntity = new Menu
             {
-                CountChild = menuDTO.CountChild,
-                DateCreate = menuDTO.DateCreate,
-                TypeChild = menuDTO.TypeChild,
+                CountChild = 0,
+                DateCreate = DateTime.MinValue,
+                TypeChild = "Сад",
                 UserId = menuDTO.UserId,
             };
 

@@ -5,5 +5,8 @@
         public int CountChild { get; set; }
 
         public string TypeChild { get; set; }
+        public DateTime DateCreate { get; set; }
+
+        public string FullName { get; set; }
     }
 }

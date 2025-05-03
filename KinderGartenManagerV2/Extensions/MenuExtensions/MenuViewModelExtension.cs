@@ -11,6 +11,8 @@ namespace KinderGartenManagerV2.Extensions.MenuEtensions
             {
                 CountChild = dto.CountChild,
                 TypeChild = dto.TypeChild,
+                DateCreate = dto.DateCreate,
+                FullName = dto.FullName,
             };
 
             return menu;

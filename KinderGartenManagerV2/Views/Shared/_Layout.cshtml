@@ -28,6 +28,12 @@
                         <ul class="navbar-nav ms-auto">
                             @if (User.Identity.IsAuthenticated)
                             {
+                                @if (User.IsInRole("Guest"))
+                                {    
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="List">Menu</a>
+                                    </li>
+                                }
                                 <li class="nav-item">
                                     <span class="nav-link text-dark">Привет, @User.Identity.Name!</span>
                                 </li>

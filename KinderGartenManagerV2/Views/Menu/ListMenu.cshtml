@@ -1,6 +1,11 @@
 ﻿@model IEnumerable<MenuViewModel>
 
 <h1 class="mb-4">Меню</h1>
+
+<form asp-action="Create" asp-controller="Menu" method="post">
+	<button class="btn btn-primary" type="submit">Создать меню</button>
+</form>
+
 <table class="table">
 	<thead>
 		<tr>
@@ -10,6 +15,13 @@
 			<th>
 				Тип сада
 			</th>
+			<th>
+				Дата создания
+			</th>
+			<th>
+				Пользователь
+			</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -21,6 +33,16 @@
 				</td>
 				<td>
 					@item.TypeChild
+				</td>
+				<td>
+					@item.DateCreate
+				</td>
+				<td>
+					@item.FullName
+				</td>
+				<td>
+					<button class="btn-info">Редактировать</button>
+					<button class="btn-danger">Удалить</button>
 				</td>
 			</tr>
 		}
