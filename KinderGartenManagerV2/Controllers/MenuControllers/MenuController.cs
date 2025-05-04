@@ -48,5 +48,13 @@ namespace KinderGartenManagerV2.Controllers.MenuControllers
 
             return RedirectToAction("List");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _menuRepository.DeleteMenuAsync(id);
+
+            return RedirectToAction("List");
+        }
     }
 }

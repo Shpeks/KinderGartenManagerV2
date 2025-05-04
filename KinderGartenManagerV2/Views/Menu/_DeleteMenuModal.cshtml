@@ -1,0 +1,20 @@
+﻿<div class="modal fade" id="deleteMenuModal" tabindex="-1" aria-labelledby="deleteMenuLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" asp-action="Delete" asp-controller="Menu">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteMenuLabel">Подтверждение удаления</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Вы уверены, что хотите удалить это меню?</p>
+                    <input type="hidden" id="deleteMenuId" name="Id" />
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

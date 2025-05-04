@@ -50,7 +50,13 @@
 							data-typechild="@item.TypeChild">
 						Редактировать
 					</button>
-					<button class="btn-danger">Удалить</button>
+					<button type="button"
+							class="btn btn-danger"
+							data-bs-toggle="modal"
+							data-bs-target="#deleteMenuModal"
+							data-id="@item.Id">
+						Удалить
+					</button>
 				</td>
 			</tr>
 		}
@@ -58,7 +64,9 @@
 </table>
 
 @await Html.PartialAsync("_EditMenuModal")
+@await Html.PartialAsync("_DeleteMenuModal")
 
 @section Scripts {
-	<script src="~/js/editMenuModal.js"></script>
+	<script src="~/js/Menu/editMenuModal.js"></script>
+	<script src="~/js/Menu/deleteMenuModal.js"></script>
 }
