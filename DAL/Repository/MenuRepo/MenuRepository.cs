@@ -53,7 +53,7 @@ namespace DAL.Repository.MenuRepo
             var menuEntity = await _context.Menus.FindAsync(menuDTO.Id);
             if (menuEntity == null) return;
 
-            menuEntity.DateCreate = menuDTO.DateCreate;
+            menuEntity.DateCreate = DateTime.SpecifyKind(menuDTO.DateCreate, DateTimeKind.Utc);
             menuEntity.CountChild = menuDTO.CountChild;
             menuEntity.TypeChild = menuDTO.TypeChild;
 

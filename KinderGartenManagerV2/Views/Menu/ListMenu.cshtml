@@ -35,7 +35,7 @@
 					@item.TypeChild
 				</td>
 				<td>
-					@item.DateCreate
+					@item.DateCreate.ToString("dd.MM.yyyy")
 				</td>
 				<td>
 					@item.FullName
@@ -47,7 +47,8 @@
 							data-bs-target="#editMenuModal"
 							data-id="@item.Id"
 							data-countchild="@item.CountChild"
-							data-typechild="@item.TypeChild">
+							data-typechild="@item.TypeChild"
+							data-dateCreate="@item.DateCreate.ToString("yyyy-MM-dd")">
 						Редактировать
 					</button>
 					<button type="button"
@@ -57,6 +58,7 @@
 							data-id="@item.Id">
 						Удалить
 					</button>
+					<button class="btn btn-info" asp-action="List" asp-controller="MenuFood" asp-route-id="@item.Id">Детали</button>
 				</td>
 			</tr>
 		}

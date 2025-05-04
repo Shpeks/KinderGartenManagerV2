@@ -7,7 +7,7 @@ namespace KinderGartenManagerV2.Mappings.MenuMappings
     {
         public static MenuDTO GetMenuDTO(this MenuViewModel viewModel)
         {
-            var menu = new MenuDTO()
+            var menu = new MenuDTO
             {
                 Id = viewModel.Id,
                 CountChild = viewModel.CountChild,
