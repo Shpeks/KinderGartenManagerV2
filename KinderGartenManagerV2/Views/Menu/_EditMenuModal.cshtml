@@ -1,0 +1,27 @@
+﻿<div class="modal fade" id="editMenuModal" tabindex="-1" aria-labelledby="editMenuLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" asp-action="Edit" asp-controller="Menu">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editMenuLabel">Редактировать меню</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editMenuId" name="Id" />
+                    <div class="mb-3">
+                        <label for="editCountChild" class="form-label">Кол-во детей</label>
+                        <input type="number" class="form-control" id="editCountChild" name="CountChild" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTypeChild" class="form-label">Тип сада</label>
+                        <input type="text" class="form-control" id="editTypeChild" name="TypeChild" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

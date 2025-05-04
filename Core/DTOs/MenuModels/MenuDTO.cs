@@ -2,7 +2,7 @@
 {
     public class MenuDTO
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public DateTime DateCreate { get; set; }
 

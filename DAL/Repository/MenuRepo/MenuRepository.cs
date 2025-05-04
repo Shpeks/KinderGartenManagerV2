@@ -22,6 +22,7 @@ namespace DAL.Repository.MenuRepo
 
             return menuEntity.Select(m => new MenuDTO
             {
+                Id = m.Id,
                 CountChild = m.CountChild,
                 DateCreate = m.DateCreate,
                 TypeChild = m.TypeChild,
@@ -47,7 +48,7 @@ namespace DAL.Repository.MenuRepo
             };
         }
 
-        public async Task MenuUpdateAsync(MenuDTO menuDTO)
+        public async Task UpdateAsync(MenuDTO menuDTO)
         {
             var menuEntity = await _context.Menus.FindAsync(menuDTO.Id);
             if (menuEntity == null) return;
@@ -64,7 +65,7 @@ namespace DAL.Repository.MenuRepo
             var menuEntity = new Menu
             {
                 CountChild = 0,
-                DateCreate = DateTime.MinValue,
+                DateCreate = DateTime.UtcNow,
                 TypeChild = "Сад",
                 UserId = menuDTO.UserId,
             };

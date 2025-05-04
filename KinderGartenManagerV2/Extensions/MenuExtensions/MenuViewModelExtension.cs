@@ -9,6 +9,7 @@ namespace KinderGartenManagerV2.Extensions.MenuEtensions
         {
             var menu = new MenuViewModel
             {
+                Id = dto.Id,
                 CountChild = dto.CountChild,
                 TypeChild = dto.TypeChild,
                 DateCreate = dto.DateCreate,

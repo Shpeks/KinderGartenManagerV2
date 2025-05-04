@@ -8,6 +8,6 @@ namespace Core.Interfaces.Repository
         Task DeleteMenuAsync(int id);
         Task<List<MenuDTO>> GetAllMenusAsync();
         Task<MenuDTO> GetMenuByIdAsync(int id);
-        Task MenuUpdateAsync(MenuDTO menuDTO);
+        Task UpdateAsync(MenuDTO menuDTO);
     }
 }

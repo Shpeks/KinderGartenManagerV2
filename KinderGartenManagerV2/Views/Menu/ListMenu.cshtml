@@ -41,10 +41,24 @@
 					@item.FullName
 				</td>
 				<td>
-					<button class="btn-info">Редактировать</button>
+					<button type="button"
+							class="btn btn-info"
+							data-bs-toggle="modal"
+							data-bs-target="#editMenuModal"
+							data-id="@item.Id"
+							data-countchild="@item.CountChild"
+							data-typechild="@item.TypeChild">
+						Редактировать
+					</button>
 					<button class="btn-danger">Удалить</button>
 				</td>
 			</tr>
 		}
 	</tbody>
 </table>
+
+@await Html.PartialAsync("_EditMenuModal")
+
+@section Scripts {
+	<script src="~/js/editMenuModal.js"></script>
+}

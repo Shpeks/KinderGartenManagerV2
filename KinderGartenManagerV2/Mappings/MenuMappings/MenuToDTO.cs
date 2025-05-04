@@ -9,10 +9,11 @@ namespace KinderGartenManagerV2.Mappings.MenuMappings
         {
             var menu = new MenuDTO()
             {
+                Id = viewModel.Id,
                 CountChild = viewModel.CountChild,
                 TypeChild = viewModel.TypeChild,
                 DateCreate = viewModel.DateCreate,
-                
+                FullName = viewModel.FullName,
             };
 
             return menu;

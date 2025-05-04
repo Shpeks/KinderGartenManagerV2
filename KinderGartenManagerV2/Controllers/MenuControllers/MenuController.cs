@@ -1,5 +1,4 @@
-﻿using API.Services;
-using Core.Interfaces.Repository;
+﻿using Core.Interfaces.Repository;
 using Core.Interfaces.Serivces;
 using KinderGartenManagerV2.Extensions.MenuEtensions;
 using KinderGartenManagerV2.Mappings.MenuMappings;
@@ -35,7 +34,17 @@ namespace KinderGartenManagerV2.Controllers.MenuControllers
         {
             var modelDto = viewModel.GetMenuDTO();
 
-            await _menuService.CreateMenuAsync(modelDto);
+            await _menuService.SetUserAsync(modelDto);
+
+            return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(MenuViewModel viewModel)
+        {
+            var modelDto = viewModel.GetMenuDTO();
+
+            await _menuRepository.UpdateAsync(modelDto);
 
             return RedirectToAction("List");
         }
