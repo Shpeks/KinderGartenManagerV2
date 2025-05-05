@@ -20,7 +20,7 @@ namespace KinderGartenManagerV2.Controllers.MenuControllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var menuDto = await _menuRepository.GetAllMenusAsync();
+            var menuDto = await _menuRepository.GetAllAsync();
 
             var viewModels = menuDto
                 .Select(dto => dto.GetMenuViewModel())
@@ -34,7 +34,7 @@ namespace KinderGartenManagerV2.Controllers.MenuControllers
         {
             var modelDto = viewModel.GetMenuDTO();
 
-            await _menuService.SetUserAsync(modelDto);
+            await _menuService.CreateMenuAsync(modelDto);
 
             return RedirectToAction("List");
         }
@@ -52,7 +52,7 @@ namespace KinderGartenManagerV2.Controllers.MenuControllers
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            await _menuRepository.DeleteMenuAsync(id);
+            await _menuRepository.DeleteAsync(id);
 
             return RedirectToAction("List");
         }

@@ -14,7 +14,7 @@ namespace DAL.Repository.MenuRepo
             _context = context;
         }
 
-        public async Task<List<MenuDTO>> GetAllMenusAsync()
+        public async Task<List<MenuDTO>> GetAllAsync()
         {
             var menuEntity = await _context.Menus
                 .Include(m => m.User)
@@ -31,11 +31,12 @@ namespace DAL.Repository.MenuRepo
             }).ToList();
         }
 
-        public async Task<MenuDTO> GetMenuByIdAsync(int id)
+        public async Task<MenuDTO> GetByIdAsync(int id)
         {
             var menuEntity = await _context.Menus
                 .FindAsync(id);
             if (menuEntity == null) return null;
+
             var user = await _context.Users.FindAsync(menuEntity.UserId);
 
             return new MenuDTO
@@ -60,7 +61,7 @@ namespace DAL.Repository.MenuRepo
             await _context.SaveChangesAsync();
         }
 
-        public async Task CreateMenuAsync(MenuDTO menuDTO)
+        public async Task CreateAsync(MenuDTO menuDTO)
         {
             var menuEntity = new Menu
             {
@@ -74,7 +75,7 @@ namespace DAL.Repository.MenuRepo
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteMenuAsync(int id)
+        public async Task DeleteAsync(int id)
         {
             var menuEntity = await _context.Menus.FindAsync(id);
             if (menuEntity == null) return;

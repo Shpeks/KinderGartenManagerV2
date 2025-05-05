@@ -4,6 +4,6 @@ namespace Core.Interfaces.Serivces
 {
     public interface IMenuService
     {
-        Task SetUserAsync(MenuDTO dto);
+        Task CreateMenuAsync(MenuDTO dto);
     }
 }

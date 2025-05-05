@@ -4,10 +4,10 @@ namespace Core.Interfaces.Repository
 {
     public interface IMenuRepository
     {
-        Task CreateMenuAsync(MenuDTO menuDTO);
-        Task DeleteMenuAsync(int id);
-        Task<List<MenuDTO>> GetAllMenusAsync();
-        Task<MenuDTO> GetMenuByIdAsync(int id);
+        Task CreateAsync(MenuDTO menuDTO);
+        Task DeleteAsync(int id);
+        Task<List<MenuDTO>> GetAllAsync();
+        Task<MenuDTO> GetByIdAsync(int id);
         Task UpdateAsync(MenuDTO menuDTO);
     }
 }

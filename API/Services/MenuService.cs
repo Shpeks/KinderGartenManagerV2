@@ -16,7 +16,7 @@ namespace API.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task SetUserAsync(MenuDTO dto)
+        public async Task CreateMenuAsync(MenuDTO dto)
         {
             var userId = _httpContextAccessor.HttpContext?.User
                 .FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -26,7 +26,7 @@ namespace API.Services
 
             dto.UserId = userId;
 
-            await _menuRepository.CreateMenuAsync(dto);
+            await _menuRepository.CreateAsync(dto);
         }
     }
 }
