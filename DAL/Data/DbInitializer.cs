@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Enums;
+using DAL.Data.Seeders;
 using DAL.Entities.UserModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DAL.Data
@@ -15,33 +17,15 @@ namespace DAL.Data
         public static async Task SeedAsync(IServiceProvider serviceProvider)
         {
             using var scope = serviceProvider.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-            // Создание ролей из enum
-            foreach (var role in Enum.GetNames(typeof(RoleEnum)))
-            {
-                if (!await roleManager.RoleExistsAsync(role))
-                {
-                    await roleManager.CreateAsync(new Role { Name = role });
-                }
-            }
+            context.Database.Migrate();
 
-            // Создание админа
-            if (await userManager.FindByNameAsync("admin") == null)
-            {
-                var admin = new User
-                {
-                    UserName = "admin",
-                    Email = "admin@mail.ru",
-                    FirstName = "admin",
-                    LastName = "super"
-                };
-
-                var result = await userManager.CreateAsync(admin, "Pa$$word123");
-
-                await userManager.AddToRoleAsync(admin, RoleEnum.Admin.ToString());
-            }
+            await RoleSeeder.SeedAsync(roleManager);
+            await AdminSeeder.SeedAsync(userManager);
+            await ReferenceSeeder.SeedAsync(context);
         }
     }
 }
