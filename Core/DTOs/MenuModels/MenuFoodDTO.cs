@@ -2,7 +2,7 @@
 {
     public class MenuFoodDTO
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         /// <summary>
         /// Название продукта

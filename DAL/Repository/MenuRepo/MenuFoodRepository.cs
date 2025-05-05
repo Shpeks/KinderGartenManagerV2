@@ -13,7 +13,7 @@ namespace DAL.Repository.MenuRepo
         {
             _context = context;
         }
-        public async Task<List<MenuFoodDTO>> GetAllMenuFoodsAsync()
+        public async Task<List<MenuFoodDTO>> GetAllAsync()
         {
             var menuFoodEntity = await _context.MenuFoods.ToListAsync();
 
@@ -30,7 +30,7 @@ namespace DAL.Repository.MenuRepo
             }).ToList();
         }
 
-        public async Task<MenuFoodDTO> GetMenuFoodByIdAsync(int id)
+        public async Task<MenuFoodDTO> GetByIdAsync(int id)
         {
             var menuFoodEntity = await _context.MenuFoods.FindAsync(id);
             if (menuFoodEntity == null) return null;
@@ -48,7 +48,7 @@ namespace DAL.Repository.MenuRepo
             };
         }
 
-        public async Task MenuFoodUpdateAsync(MenuFoodDTO menuFoodDTO)
+        public async Task UpdateAsync(MenuFoodDTO menuFoodDTO)
         {
             var menuFoodEntity = await _context.MenuFoods.FindAsync(menuFoodDTO.Id);
             if (menuFoodEntity == null) return;
@@ -65,7 +65,7 @@ namespace DAL.Repository.MenuRepo
             await _context.SaveChangesAsync();
         }
 
-        public async Task CreateMenuFoodAsync(MenuFoodDTO menuFoodDTO)
+        public async Task CreateAsync(MenuFoodDTO menuFoodDTO)
         {
             var menuFoodEntity = new MenuFood
             {
@@ -83,7 +83,7 @@ namespace DAL.Repository.MenuRepo
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteMenuFoodAsync(int id)
+        public async Task DeleteAsync(int id)
         {
             var menuFoodEntity = await _context.MenuFoods.FindAsync(id);
             if (menuFoodEntity == null) return;
