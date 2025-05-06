@@ -13,17 +13,18 @@ namespace DAL.Repository.MenuRepo
         {
             _context = context;
         }
-        public async Task<List<UnitDTO>> GetAllUnitsAsync()
+        public async Task<List<UnitDTO>> GetAllAsync()
         {
             var unitEntity = await _context.Units.ToListAsync();
 
             return unitEntity.Select(m => new UnitDTO
             {
+                Id = m.Id,
                 Name = m.Name,
             }).ToList();
         }
 
-        public async Task<UnitDTO> GetUnitByIdAsync(int id)
+        public async Task<UnitDTO> GetByIdAsync(int id)
         {
             var unitEntity = await _context.Units.FindAsync(id);
             if (unitEntity == null) return null;
@@ -34,7 +35,7 @@ namespace DAL.Repository.MenuRepo
             };
         }
 
-        public async Task UnitUpdateAsync(UnitDTO unitDTO)
+        public async Task UpdateAsync(UnitDTO unitDTO)
         {
             var unitEntity = await _context.Units.FindAsync(unitDTO.Id);
             if (unitEntity == null) return;
@@ -44,7 +45,7 @@ namespace DAL.Repository.MenuRepo
             await _context.SaveChangesAsync();
         }
 
-        public async Task CreateUnitAsync(UnitDTO unitDTO)
+        public async Task CreateAsync(UnitDTO unitDTO)
         {
             var unitEntity = new Unit
             {
@@ -55,7 +56,7 @@ namespace DAL.Repository.MenuRepo
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteUnitAsync(int id)
+        public async Task DeleteAsync(int id)
         {
             var unitEntity = await _context.Units.FindAsync(id);
             if (unitEntity == null) return;

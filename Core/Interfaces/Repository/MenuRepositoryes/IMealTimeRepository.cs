@@ -4,7 +4,7 @@ namespace Core.Interfaces.Repository
 {
     public interface IMealTimeRepository
     {
-        Task<List<MealTimeDTO>> GetAllMealTimes();
-        Task<MealTimeDTO> GetMealTimeById(int id);
+        Task<List<MealTimeDTO>> GetAllAsync();
+        Task<MealTimeDTO> GetByIdAsync(int id);
     }
 }

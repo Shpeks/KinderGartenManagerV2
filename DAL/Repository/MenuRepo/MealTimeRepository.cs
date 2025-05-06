@@ -13,17 +13,18 @@ namespace DAL.Repository.MenuRepo
             _context = context;
         }
 
-        public async Task<List<MealTimeDTO>> GetAllMealTimes()
+        public async Task<List<MealTimeDTO>> GetAllAsync()
         {
             var timeEntity = await _context.MealsTime.ToListAsync();
 
             return timeEntity.Select(b => new MealTimeDTO
             {
+                Id = b.Id,
                 Name = b.Name,
             }).ToList();
         }
 
-        public async Task<MealTimeDTO> GetMealTimeById(int id)
+        public async Task<MealTimeDTO> GetByIdAsync(int id)
         {
             var timeEntity = await _context.MealsTime.FindAsync(id);
             if (timeEntity == null) return null;
