@@ -1,0 +1,46 @@
+﻿<div class="modal fade" id="createMenuFoodModal" tabindex="-1" aria-labelledby="createMenuFoodLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-action="Create" asp-controller="MenuFood" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createMenuFoodLabel">Добавить блюдо</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="MenuId" id="MenuId" value="@ViewBag.MenuId" />
+
+                    <div class="mb-3">
+                        <label for="Name" class="form-label">Название</label>
+                        <input type="text" class="form-control" id="Name" name="Name" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="CountPerUnit" class="form-label">Количество на одного</label>
+                        <input type="number" class="form-control" id="CountPerUnit" name="CountPerUnit" step="0.01" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="UnitId" class="form-label">Единица измерения</label>
+                        <select class="form-select" id="UnitId" name="UnitId" asp-items="ViewBag.Units">
+                            <option value="">Выберите</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="MealId" class="form-label">Блюдо</label>
+                        <select class="form-select" id="MealId" name="MealId" asp-items="ViewBag.Meals"></select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="MealTimeId" class="form-label">Прием пищи</label>
+                        <select class="form-select" id="MealTimeId" name="MealTimeId" asp-items="ViewBag.MealTimes"></select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Создать</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

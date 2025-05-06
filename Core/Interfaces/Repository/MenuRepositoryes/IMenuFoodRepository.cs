@@ -7,7 +7,7 @@ namespace Core.Interfaces.Repository
         Task CreateAsync(MenuFoodDTO menuFoodDTO);
         Task DeleteAsync(int id);
         Task<List<MenuFoodDTO>> GetAllAsync();
-        Task<MenuFoodDTO> GetByIdAsync(int id);
+        Task<List<MenuFoodDTO>> GetByMenuIdAsync(int id);
         Task UpdateAsync(MenuFoodDTO menuFoodDTO);
     }
 }

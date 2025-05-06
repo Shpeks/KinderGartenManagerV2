@@ -23,9 +23,15 @@
 
         public int MealId { get; set; }
 
+        public string MealName { get; set; }
+
         public int MealTimeId { get; set; }
 
+        public string MealTimeName { get; set; }
+
         public int UnitId { get; set; }
+
+        public string UnitName { get; set; }
 
         public int MenuId { get; set; }
     }

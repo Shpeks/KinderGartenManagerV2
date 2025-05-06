@@ -58,7 +58,9 @@
 							data-id="@item.Id">
 						Удалить
 					</button>
-					<button class="btn btn-info" asp-action="List" asp-controller="MenuFood" asp-route-id="@item.Id">Детали</button>
+					<a class="btn btn-info" href="@Url.Action("List", "MenuFood", new { id = item.Id })">
+						Детали
+					</a>
 				</td>
 			</tr>
 		}

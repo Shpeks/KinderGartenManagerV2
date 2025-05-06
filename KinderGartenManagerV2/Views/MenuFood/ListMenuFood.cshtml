@@ -1,0 +1,89 @@
+﻿@model IEnumerable<MenuFoodViewModel>
+
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createMenuFoodModal">
+	Добавить блюдо
+</button>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				Название
+			</th>
+			<th>
+				Кол-во
+			</th>
+			<th>
+				Кол-во за ед.
+			</th>
+			<th>
+				Код
+			</th>
+			<th>
+				Блюдо
+			</th>
+			<th>
+				Ед. измерения
+			</th>
+			<th>
+				Время
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@item.Name
+				</td>
+				<td>
+					@item.Count
+				</td>
+				<td>
+					@item.CountPerUnit
+				</td>
+				<td>
+					@item.Code
+				</td>
+				<td>
+					@item.MealName
+				</td>
+				<td>
+					@item.UnitName
+				</td>
+				<td>
+					@item.MealTimeName
+				</td>
+				<td>
+					<button type="button"
+							class="btn btn-info"
+							data-bs-toggle="modal"
+							data-bs-target="#editMenuFoodModal"
+							data-id="@item.Id"
+							data-name="@item.Name"
+							data-countPerUnit="@item.CountPerUnit"
+							data-code="@item.Code"
+							data-mealId="@item.MealId"
+							data-mealTimeId="@item.MealTimeId"
+							data-unitId="@item.UnitId"
+							data-menuId="@item.MenuId">
+						Редактировать
+					</button>
+					<button type="button"
+							class="btn btn-danger"
+							data-bs-toggle="modal"
+							data-bs-target="#deleteMenuModal"
+							data-id="@item.Id">
+						Удалить
+					</button>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<a href="@Url.Action("List", "Menu")" class="btn btn-secondary">Назад</a>
+
+@await Html.PartialAsync("_CreateMenuFoodModal")

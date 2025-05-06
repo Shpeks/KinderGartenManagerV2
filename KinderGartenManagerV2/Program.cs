@@ -14,8 +14,13 @@ var conf = builder.Configuration;
 // Add services to the container.
 services.AddControllersWithViews();
 
-services.AddScoped<IMenuService, MenuService>();
 services.AddTransient<IMenuRepository, MenuRepository>();
+services.AddTransient<IMenuFoodRepository, MenuFoodRepository>();
+services.AddTransient<IUnitRepository, UnitRepository>();
+services.AddTransient<IMealRepository, MealRepository>();
+services.AddTransient<IMealTimeRepository, MealTimeRepository>();
+services.AddScoped<IMenuFoodService, MenuFoodService>();
+services.AddScoped<IMenuService, MenuService>();
 services.AddScoped<IUserService, UserService>();
 
 services.AddDbContext<ApplicationDbContext>(options =>

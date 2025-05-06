@@ -30,22 +30,32 @@ namespace DAL.Repository.MenuRepo
             }).ToList();
         }
 
-        public async Task<MenuFoodDTO> GetByIdAsync(int id)
+        public async Task<List<MenuFoodDTO>> GetByMenuIdAsync(int id)
         {
-            var menuFoodEntity = await _context.MenuFoods.FindAsync(id);
+            var menuFoodEntity = await _context.MenuFoods
+                .Where(x => x.MenuId == id)
+                .Include(mf => mf.Unit)
+                .Include(mf => mf.Meal)
+                .Include(mf => mf.MealTime)
+                .ToListAsync();
+
             if (menuFoodEntity == null) return null;
 
-            return new MenuFoodDTO
+            return menuFoodEntity.Select(x =>  new MenuFoodDTO
             {
-                Code = menuFoodEntity.Code,
-                Count = menuFoodEntity.Count,
-                CountPerUnit = menuFoodEntity.CountPerUnit,
-                MealId = menuFoodEntity.MealId,
-                MealTimeId = menuFoodEntity.MealTimeId,
-                MenuId = menuFoodEntity.MenuId,
-                Name = menuFoodEntity.Name,
-                UnitId = menuFoodEntity.UnitId,
-            };
+                Id = x.Id,
+                Name = x.Name,
+                Code = x.Code,
+                CountPerUnit = x.CountPerUnit,
+                Count = x.Count,
+                MealId = x.MealId,
+                MealName = x.Meal.Name,
+                MealTimeId = x.MealTimeId,
+                MealTimeName = x.MealTime.Name,
+                UnitId = x.UnitId,
+                UnitName = x.Unit.Name,
+                MenuId = x.MenuId,
+            }).ToList();
         }
 
         public async Task UpdateAsync(MenuFoodDTO menuFoodDTO)
