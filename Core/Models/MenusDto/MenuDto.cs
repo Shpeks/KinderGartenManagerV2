@@ -1,6 +1,6 @@
-﻿namespace Core.DTOs.MenuModels
+﻿namespace Core.Models.MenusDto
 {
-    public class MenuDTO
+    public class MenuDto
     {
         public int? Id { get; set; }
 

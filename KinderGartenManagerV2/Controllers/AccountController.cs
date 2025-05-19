@@ -1,7 +1,4 @@
-﻿using Core.DTOs.AccountsModels;
-using Core.Interfaces.Serivces;
-using DAL.Entities.UserModels;
-using KinderGartenManagerV2.Extensions.AccountExtensions;
+﻿using Core.Interfaces.Serivces;
 using KinderGartenManagerV2.Mappings.AccountMappings;
 using KinderGartenManagerV2.Models.AccountModels;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +28,7 @@ namespace KinderGartenManagerV2.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel viewModel)
         {
-            var modelDto = viewModel.GetLoginDTO();
+            var modelDto = viewModel.GetDto();
 
             var result = await _userSerice.LoginAsync(modelDto);
 
@@ -42,7 +39,7 @@ namespace KinderGartenManagerV2.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel viewModel)
         {
-            var modelDto = viewModel.GetRegisterDTO();
+            var modelDto = viewModel.GetDto();
 
             var result = await _userSerice.RegisterAsync(modelDto);
 

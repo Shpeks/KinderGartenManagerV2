@@ -1,13 +1,13 @@
-﻿using Core.DTOs.MenuModels;
+﻿using Core.Models.MenusDto;
 using KinderGartenManagerV2.Models.MenuModels;
 
 namespace KinderGartenManagerV2.Mappings.MenuMappings
 {
-    public static class MenuFoodToDTO
+    public static class MenuFoodDtoMapping
     {
-        public static MenuFoodDTO GetMenuFoodDTO(this MenuFoodViewModel viewModel)
+        public static MenuFoodDto GetDto(this MenuFoodViewModel viewModel)
         {
-            var menuFood = new MenuFoodDTO
+            var menuFood = new MenuFoodDto
             {
                 Id = viewModel.Id,
                 Name = viewModel.Name,

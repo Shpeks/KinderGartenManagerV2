@@ -1,9 +1,9 @@
-﻿using Core.DTOs.MenuModels;
+﻿using Core.Models.MenusDto;
 using Core.Interfaces.Repository;
 using DAL.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL.Repository.MenuRepo
+namespace Core.Repositories.MenuRepositories
 {
     public class MealTimeRepository : IMealTimeRepository
     {
@@ -13,23 +13,22 @@ namespace DAL.Repository.MenuRepo
             _context = context;
         }
 
-        public async Task<List<MealTimeDTO>> GetAllAsync()
+        public async Task<List<MealTimeDto>> GetAllAsync()
         {
             var timeEntity = await _context.MealsTime.ToListAsync();
 
-            return timeEntity.Select(b => new MealTimeDTO
+            return timeEntity.Select(b => new MealTimeDto
             {
                 Id = b.Id,
                 Name = b.Name,
             }).ToList();
         }
 
-        public async Task<MealTimeDTO> GetByIdAsync(int id)
+        public async Task<MealTimeDto> GetByIdAsync(int id)
         {
             var timeEntity = await _context.MealsTime.FindAsync(id);
-            if (timeEntity == null) return null;
 
-            return new MealTimeDTO
+            return new MealTimeDto
             {
                 Name = timeEntity.Name,
             };

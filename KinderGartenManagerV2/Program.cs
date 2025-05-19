@@ -1,9 +1,10 @@
-using API.Services;
+using Core;
 using Core.Interfaces.Repository;
 using Core.Interfaces.Serivces;
+using Core.Repositories.MenuRepositories;
+using Core.Services;
 using DAL.Data;
 using DAL.Entities.UserModels;
-using DAL.Repository.MenuRepo;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,7 +40,7 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
     await DbInitializer.SeedAsync(scope.ServiceProvider);
 }
-
+//TODO сделать эндпоинты
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Enums;
-using DAL.Data.Seeders;
+﻿using Core.Seeders;
+using DAL.Data;
 using DAL.Entities.UserModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DAL.Data
+namespace Core
 {
     public static class DbInitializer
     {

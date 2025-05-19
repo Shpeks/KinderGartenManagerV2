@@ -1,13 +1,11 @@
-﻿using Core.DTOs.AccountsModels;
-using Core.DTOs.MenuModels;
+﻿using Core.Models.AccountsDto;
 using KinderGartenManagerV2.Models.AccountModels;
-using KinderGartenManagerV2.Models.MenuModels;
 
 namespace KinderGartenManagerV2.Extensions.AccountExtensions
 {
-    public static class RegisterExtension
+    public static class RegisterViewModelExtension
     {
-        public static RegisterViewModel GetRegisterViewModel(this RegisterDTO dto)
+        public static RegisterViewModel GetViewModel(this RegisterDto dto)
         {
             var register = new RegisterViewModel
             {

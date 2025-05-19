@@ -1,13 +1,13 @@
-﻿using Core.DTOs.AccountsModels;
+﻿using Core.Models.AccountsDto;
 using KinderGartenManagerV2.Models.AccountModels;
 
 namespace KinderGartenManagerV2.Mappings.AccountMappings
 {
-    public static class RegisterToDTO
+    public static class RegisterDtoMapping
     {
-        public static RegisterDTO GetRegisterDTO(this RegisterViewModel viewModel)
+        public static RegisterDto GetDto(this RegisterViewModel viewModel)
         {
-            var register = new RegisterDTO
+            var register = new RegisterDto
             {
                 FirstName = viewModel.FirstName,
                 LastName = viewModel.LastName,

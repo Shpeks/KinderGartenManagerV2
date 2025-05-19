@@ -1,13 +1,13 @@
-﻿using Core.DTOs.MenuModels;
+﻿using Core.Models.MenusDto;
 
 namespace Core.Interfaces.Repository
 {
     public interface IMenuFoodRepository
     {
-        Task CreateAsync(MenuFoodDTO menuFoodDTO);
+        Task CreateAsync(MenuFoodDto menuFoodDTO);
         Task DeleteAsync(int id);
-        Task<List<MenuFoodDTO>> GetAllAsync();
-        Task<List<MenuFoodDTO>> GetByMenuIdAsync(int id);
-        Task UpdateAsync(MenuFoodDTO menuFoodDTO);
+        Task<List<MenuFoodDto>> GetAllAsync();
+        Task<List<MenuFoodDto>> GetByMenuIdAsync(int id);
+        Task UpdateAsync(MenuFoodDto menuFoodDTO);
     }
 }

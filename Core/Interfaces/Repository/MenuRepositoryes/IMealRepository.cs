@@ -1,10 +1,10 @@
-﻿using Core.DTOs.MenuModels;
+﻿using Core.Models.MenusDto;
 
 namespace Core.Interfaces.Repository
 {
     public interface IMealRepository
     {
-        Task<List<MealDTO>> GetAllAsync();
-        Task<MealDTO> GetByIdAsync(int id);
+        Task<List<MealDto>> GetAllAsync();
+        Task<MealDto> GetByIdAsync(int id);
     }
 }

@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Core.Enums
 {
     public enum MealTimeEnum
     {
-        Завтрак,
-        Второй_завтрак,
-        Обед,
-        Полдник,
-        Ужин
+        [Display(Name = "Завтрак")]
+        Breakfast = 1,
+
+        [Display(Name = "Второй завтрак")]
+        SecondBreakfast = 2,
+
+        [Display(Name = "Обед")]
+        Lunch = 3,
+
+        [Display(Name = "Полдник")]
+        AfternoonSnack = 4,
+
+        [Display(Name = "Ужин")]
+        Dinner = 5
     }
 }

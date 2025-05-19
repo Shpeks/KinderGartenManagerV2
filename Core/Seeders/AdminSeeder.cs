@@ -1,14 +1,8 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Enums;
+﻿using Core.Enums;
 using DAL.Entities.UserModels;
 using Microsoft.AspNetCore.Identity;
 
-namespace DAL.Data.Seeders
+namespace Core.Seeders
 {
     public static class AdminSeeder
     {

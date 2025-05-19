@@ -1,10 +1,10 @@
-﻿using Core.DTOs.MenuModels;
+﻿using Core.Models.MenusDto;
 using Core.Interfaces.Repository;
 using DAL.Data;
 using DAL.Entities.MenuModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL.Repository.MenuRepo
+namespace Core.Repositories.MenuRepositories
 {
     public class MenuRepository : IMenuRepository
     {
@@ -14,13 +14,13 @@ namespace DAL.Repository.MenuRepo
             _context = context;
         }
 
-        public async Task<List<MenuDTO>> GetAllAsync()
+        public async Task<List<MenuDto>> GetAllAsync()
         {
             var menuEntity = await _context.Menus
                 .Include(m => m.User)
                 .ToListAsync();
 
-            return menuEntity.Select(m => new MenuDTO
+            return menuEntity.Select(m => new MenuDto
             {
                 Id = m.Id,
                 CountChild = m.CountChild,
@@ -31,7 +31,7 @@ namespace DAL.Repository.MenuRepo
             }).ToList();
         }
 
-        public async Task<MenuDTO> GetByIdAsync(int id)
+        public async Task<MenuDto> GetByIdAsync(int id)
         {
             var menuEntity = await _context.Menus
                 .FindAsync(id);
@@ -39,7 +39,7 @@ namespace DAL.Repository.MenuRepo
 
             var user = await _context.Users.FindAsync(menuEntity.UserId);
 
-            return new MenuDTO
+            return new MenuDto
             {
                 CountChild = menuEntity.CountChild,
                 DateCreate = menuEntity.DateCreate,
@@ -49,7 +49,7 @@ namespace DAL.Repository.MenuRepo
             };
         }
 
-        public async Task UpdateAsync(MenuDTO menuDTO)
+        public async Task UpdateAsync(MenuDto menuDTO)
         {
             var menuEntity = await _context.Menus.FindAsync(menuDTO.Id);
             if (menuEntity == null) return;
@@ -61,18 +61,29 @@ namespace DAL.Repository.MenuRepo
             await _context.SaveChangesAsync();
         }
 
-        public async Task CreateAsync(MenuDTO menuDTO)
+        public async Task CreateAsync(MenuDto menuDTO)
         {
-            var menuEntity = new Menu
+            using var tr = _context.Database.BeginTransaction();
+            try
             {
-                CountChild = 0,
-                DateCreate = DateTime.UtcNow,
-                TypeChild = "Сад",
-                UserId = menuDTO.UserId,
-            };
+                var menuEntity = new Menu
+                {
+                    CountChild = 0,
+                    DateCreate = DateTime.UtcNow,
+                    TypeChild = "Сад",
+                    UserId = menuDTO.UserId,
+                };
 
-            await _context.AddAsync(menuEntity);
-            await _context.SaveChangesAsync();
+                await _context.AddAsync(menuEntity);
+                await _context.SaveChangesAsync();
+
+                tr.Commit();
+            }
+            catch (Exception ex)
+            {
+                tr.Rollback();
+                throw new ApplicationException("Ошибка", ex);
+            }
         }
 
         public async Task DeleteAsync(int id)

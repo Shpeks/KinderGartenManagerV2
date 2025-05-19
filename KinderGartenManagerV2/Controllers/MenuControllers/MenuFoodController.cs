@@ -36,19 +36,19 @@ namespace KinderGartenManagerV2.Controllers.MenuControllers
             var dto = await _menuFoodRepository.GetByMenuIdAsync(id);
 
             var viewModel = dto
-                .Select(mf => mf.GetMenuFoodViewModel())
+                .Select(mf => mf.GetViewModel())
                 .ToList();
 
             var unitViewModels = (await _unitRepository.GetAllAsync())
-                .Select(u => u.GetUnitViewModel())
+                .Select(u => u.GetViewModel())
                 .ToList();
 
             var mealViewModels = (await _mealRepository.GetAllAsync())
-                .Select(m => m.GetMealViewModel())
+                .Select(m => m.GetViewModel())
                 .ToList();
 
             var mealTimeViewModels = (await _mealTimeRepository.GetAllAsync())
-                .Select(mt => mt.GetMealTimeViewModel())
+                .Select(mt => mt.GetViewModel())
                 .ToList();
 
             ViewBag.Units = new SelectList(unitViewModels, "Id", "Name");
@@ -56,7 +56,6 @@ namespace KinderGartenManagerV2.Controllers.MenuControllers
             ViewBag.MealTimes = new SelectList(mealTimeViewModels, "Id", "Name");
 
             ViewBag.MenuId = id;
-            
 
             return View("ListMenuFood", viewModel);
         }
@@ -64,7 +63,7 @@ namespace KinderGartenManagerV2.Controllers.MenuControllers
         [HttpPost]
         public async Task<IActionResult> Create(MenuFoodViewModel viewModel)
         {
-            var dto = viewModel.GetMenuFoodDTO();
+            var dto = viewModel.GetDto();
             await _menuFoodService.CreateMenuAsync(dto);
 
             return RedirectToAction("List", new { id = viewModel.MenuId });

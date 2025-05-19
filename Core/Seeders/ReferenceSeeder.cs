@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Enums;
+﻿using Core.Enums;
+using DAL.Data;
 using DAL.Entities.MenuModels;
 
-namespace DAL.Data.Seeders
+namespace Core.Seeders
 {
     public static class ReferenceSeeder
     {
@@ -16,7 +12,7 @@ namespace DAL.Data.Seeders
             await SeedMealTimesAsync(context);
             await context.SaveChangesAsync();
         }
-
+        // TODO: переделать алгоритм добаления. Сейчас не будут добавляться новые записи в таблицу если есть хоть какие то
         private static async Task SeedUnitsAsync(ApplicationDbContext context)
         {
             if (!context.Units.Any())
@@ -24,7 +20,7 @@ namespace DAL.Data.Seeders
                 var units = Enum.GetValues(typeof(UnitEnum))
                     .Cast<UnitEnum>()
                     .Select(u => new Unit { Name = u.ToString() });
-                
+
                 await context.Units.AddRangeAsync(units);
             }
         }

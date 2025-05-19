@@ -1,9 +1,9 @@
-﻿using Core.DTOs.MenuModels;
+﻿using Core.Models.MenusDto;
 
 namespace Core.Interfaces.Serivces
 {
     public interface IMenuFoodService
     {
-        Task CreateMenuAsync(MenuFoodDTO dto);
+        Task CreateMenuAsync(MenuFoodDto dto);
     }
 }

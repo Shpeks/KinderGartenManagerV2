@@ -1,6 +1,6 @@
-﻿namespace Core.DTOs.AccountsModels
+﻿namespace Core.Models.AccountsDto
 {
-    public class RegisterDTO
+    public class RegisterDto
     {
         public string FirstName { get; set; }
 

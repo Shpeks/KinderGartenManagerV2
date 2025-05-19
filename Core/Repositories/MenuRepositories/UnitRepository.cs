@@ -1,10 +1,10 @@
-﻿using Core.DTOs.MenuModels;
+﻿using Core.Models.MenusDto;
 using Core.Interfaces.Repository;
 using DAL.Data;
 using DAL.Entities.MenuModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL.Repository.MenuRepo
+namespace Core.Repositories.MenuRepositories
 {
     public class UnitRepository : IUnitRepository
     {
@@ -13,29 +13,29 @@ namespace DAL.Repository.MenuRepo
         {
             _context = context;
         }
-        public async Task<List<UnitDTO>> GetAllAsync()
+        public async Task<List<UnitDto>> GetAllAsync()
         {
             var unitEntity = await _context.Units.ToListAsync();
 
-            return unitEntity.Select(m => new UnitDTO
+            return unitEntity.Select(m => new UnitDto
             {
                 Id = m.Id,
                 Name = m.Name,
             }).ToList();
         }
 
-        public async Task<UnitDTO> GetByIdAsync(int id)
+        public async Task<UnitDto> GetByIdAsync(int id)
         {
             var unitEntity = await _context.Units.FindAsync(id);
             if (unitEntity == null) return null;
 
-            return new UnitDTO
+            return new UnitDto
             {
                 Name = unitEntity.Name,
             };
         }
 
-        public async Task UpdateAsync(UnitDTO unitDTO)
+        public async Task UpdateAsync(UnitDto unitDTO)
         {
             var unitEntity = await _context.Units.FindAsync(unitDTO.Id);
             if (unitEntity == null) return;
@@ -45,7 +45,7 @@ namespace DAL.Repository.MenuRepo
             await _context.SaveChangesAsync();
         }
 
-        public async Task CreateAsync(UnitDTO unitDTO)
+        public async Task CreateAsync(UnitDto unitDTO)
         {
             var unitEntity = new Unit
             {

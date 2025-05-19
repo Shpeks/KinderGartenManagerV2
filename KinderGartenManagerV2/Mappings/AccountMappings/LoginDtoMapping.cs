@@ -1,13 +1,13 @@
-﻿using Core.DTOs.AccountsModels;
+﻿using Core.Models.AccountsDto;
 using KinderGartenManagerV2.Models.AccountModels;
 
 namespace KinderGartenManagerV2.Mappings.AccountMappings
 {
-    public static class LoginToDTO
+    public static class LoginDtoMapping
     {
-        public static LoginDTO GetLoginDTO(this LoginViewModel viewModel)
+        public static LoginDto GetDto(this LoginViewModel viewModel)
         {
-            var login = new LoginDTO
+            var login = new LoginDto
             {
                 UserName = viewModel.UserName,
                 Password = viewModel.Password,

@@ -1,11 +1,11 @@
-﻿using Core.DTOs.MenuModels;
+﻿using Core.Models.MenusDto;
 using KinderGartenManagerV2.Models.MenuModels;
 
 namespace KinderGartenManagerV2.Extensions.MenuExtensions
 {
     public static class MealViewModelExtension
     {
-        public static MealViewModel GetMealViewModel(this MealDTO dto)
+        public static MealViewModel GetViewModel(this MealDto dto)
         {
             var meal = new MealViewModel
             {

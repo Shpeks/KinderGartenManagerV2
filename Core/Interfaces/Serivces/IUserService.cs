@@ -1,12 +1,12 @@
-﻿using Core.DTOs.AccountsModels;
+﻿using Core.Models.AccountsDto;
 using Microsoft.AspNetCore.Identity;
 
 namespace Core.Interfaces.Serivces
 {
     public interface IUserService
     {
-        Task<SignInResult> LoginAsync(LoginDTO loginDTO);
+        Task<SignInResult> LoginAsync(LoginDto loginDTO);
         Task LogoutAsync();
-        Task<IdentityResult> RegisterAsync(RegisterDTO userDTO);
+        Task<IdentityResult> RegisterAsync(RegisterDto userDTO);
     }
 }
